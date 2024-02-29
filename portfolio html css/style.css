@@ -32,6 +32,15 @@ header {
     display: flex;
     justify-content: flex-end;
     padding: 27px 60px;
+    border-bottom: 2px solid black;
+    position: fixed;
+    height: fit-content;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 999;
 }
 
 header nav ul {
@@ -251,4 +260,44 @@ footer p {
     width: fit-content;
     margin: auto;
     margin-top: 26px;
+}
+
+.up{
+    background-color: #00A8CC;
+    padding: 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.ad{
+    width: 100px;
+    height: 200px;
+    font-size: 50px;
+    background-color: brown;
+    position: sticky;
+    top: 85px;
+}
+
+.drop-down-menu{
+    position: relative;
+}
+
+.drop-down-menu:hover .drop-down{
+    display: block;
+}
+
+.drop-down{
+    display: none;
+    position: absolute;
+    width: 100%;
+
+}
+
+.drop-down li{
+    border: 2px solid black;
+    width: 100%;
+    margin-top: 5px;
+    background-color: white;
+    text-align: center;
 }
