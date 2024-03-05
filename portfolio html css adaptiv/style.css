@@ -23,6 +23,27 @@ a {
     color: black;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #8695A4;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #00A8CC;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #142850;
+  }
+
 body {
     font-family: Heebo;
 }
@@ -408,6 +429,8 @@ footer p {
     
     main section.section-three .featured-works {
         margin-top: 2px;
+        max-height: 530px;
+        overflow-y: scroll;
     }
     
     main section.section-three .featured-works li {
