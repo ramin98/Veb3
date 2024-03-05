@@ -1,0 +1,215 @@
+@font-face {
+    font-family: Roboto Slab;
+    src: url('assets/fonts/RobotoSlab-Regular.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    text-decoration: none;
+    font-style: inherit;
+    color: black;
+}
+
+
+body {
+    font-family: Roboto Slab;
+}
+
+main{
+    padding: 56px 36px;
+}
+main h1.site-header{
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 60.36px;
+}
+
+main section.section-one{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+main section.section-one div p{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+main section.section-one img{
+    width: 170px;
+    height: 160px;
+    margin-top: 20px;
+}
+
+main section.section-two{
+    display: flex;
+    width: 100%;
+    margin-top: 45px;
+}
+
+main section.section-two ul{
+    display: flex;
+    gap: 33px;
+    flex-wrap: wrap;
+}
+
+main section.section-two ul li{
+    min-width: 87px;
+    width: 87px;
+    flex-shrink: 1;
+}
+
+main section.section-two ul li h3{
+    font-size: 12px;
+    line-height: 15.6px;
+    font-weight: 700;
+}
+
+main section.section-two ul li p{
+    font-size: 10px;
+    line-height: 15.6px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+main section.section-two img{
+    display: none;
+}
+
+@media (min-width: 840px){
+    main{
+        padding: 56px 72px;
+    }
+
+    main h1.site-header{
+        font-size: 32px;
+        line-height: 50.44px;
+    }
+    
+    main section.section-one{
+        margin-top: 40px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    main section.section-one div{
+        width: 383px;
+    }
+    
+    main section.section-one div p{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+    }
+    
+    main section.section-one img{
+        width: 182px;
+        height: 182px;
+        margin-top: 0px;
+    }
+    
+    main section.section-two{
+        margin-top: 70px;
+    }
+    
+    main section.section-two ul{
+        gap: 55px;
+    }
+    
+    main section.section-two ul li{
+        min-width: 108px;
+        width: 108px;
+    }
+    
+    main section.section-two ul li h3{
+        font-size: 15px;
+        line-height: 19.6px;
+        font-weight: 700;
+    }
+    
+    main section.section-two ul li p{
+        font-size: 11px;
+        line-height: 14.6px;
+        font-weight: 400;
+        margin-top: 2px;
+    }
+
+}
+
+@media (min-width: 1440px){
+    main{
+        padding: 91px 124px;
+    }
+    
+    main h1.site-header{
+        font-size: 55px;
+        line-height: 70.44px;
+    }
+
+    main section.section-one{
+        margin-top: 50px;
+    }
+    
+
+    main section.section-one div{
+        width: 662px;
+    }
+    
+    main section.section-one div p{
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 36px;
+    }
+    
+    main section.section-one img{
+        width: 315px;
+        height: 315px;
+    }
+    
+    main section.section-two{
+        margin-top: 90px;
+        align-items: center;
+    }
+    
+    main section.section-two ul{
+        gap: 95px;
+        flex-wrap: nowrap;
+        margin-left: 132px;
+    }
+    
+    main section.section-two ul li{
+        min-width: 150px;
+        width: 150px;
+    }
+    
+    main section.section-two ul li h3{
+        font-size: 25px;
+        line-height: 32.6px;
+    }
+    
+    main section.section-two ul li p{
+        font-size: 18px;
+        line-height: 23.6px;
+        margin-top: 2px;
+    }
+    main section.section-two img{
+        display: inline-block;
+    }
+}
