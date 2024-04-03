@@ -986,3 +986,38 @@ let a = new Admin('Sam', 'Tarly', 27, 'male','senior')
 h.rename('Tom')
 console.log(h)
 console.log(a)
+
+// function f(arg) {
+//     console.log(arg);
+//     console.log(this);
+// }
+
+// f('abc'); // abc, [object Window]
+
+// f.call('123', 'abc'); // abc, 123
+
+// function f() {
+//     console.log(this);
+//     for (var i = 0; i < arguments.length; i++) {
+//         console.log(arguments[i]);
+//     }
+// }
+
+// f(1, 2, 3); // [object Window], 1, 2, 3 
+
+// f.apply('abc', [1, 2, 3, 4]); // abc, 1, 2, 3, 4
+
+// function f() { 
+//     console.log(this); 
+//     } 
+//     let wrapped = f.bind('123'); 
+//     f(); // [object Window] 
+//     wrapped(); // abc
+
+// function add(a, b) {
+//     return a + b;
+// }
+// let addOne = add.bind(null, 1);
+// alert(add(1, 2)); // 3 
+
+// alert(addOne(2)); // 3
