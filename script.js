@@ -950,3 +950,39 @@ console.log(h)
 console.log(a)
 h.saysHello()
 a.saysHello()
+
+class Person {
+    constructor(name, surname, age, gender) {
+        this.name = name
+        this.surname = surname
+        this.age = age
+        this.gender = gender
+    }
+
+    rename(newName){
+        this.name = newName
+    }
+}
+
+class HelpDesk extends Person {
+    constructor(name, surname, age, gender, id, role) {
+        super(name, surname, age, gender)
+        this.id = id
+        this.role = role
+    }
+
+}
+
+class Admin extends Person {
+    constructor(name, surname, age, gender, level) {
+        super(name, surname, age, gender)
+        this.level = level
+    }
+
+}
+
+let h = new HelpDesk('Sam', 'Tarly', 27, 'male','heldesk', 2)
+let a = new Admin('Sam', 'Tarly', 27, 'male','senior')
+h.rename('Tom')
+console.log(h)
+console.log(a)
