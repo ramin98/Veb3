@@ -1,0 +1,14 @@
+/* *{
+    margin: 0;
+    padding: 0;
+} */
+
+
+.none{
+    display: none;
+}
+
+label p{
+    display: none;
+    color: red;
+}
