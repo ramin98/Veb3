@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
+    <form id="addForm">
+        <input placeholder="FROM" name="from" type="text">
+        <input placeholder="TO" name="to" type="text">
+        <input placeholder="MESSAGE" name="message" type="text">
+        <button type="submit">ADD</button>
+    </form>
     <ul id="list"></ul>
+    <div style="display: none;" id="changeFormContainer">
+        <form id="changeForm">
+            <input placeholder="FROM" name="from" type="text">
+            <input placeholder="TO" name="to" type="text">
+            <input placeholder="MESSAGE" name="message" type="text">
+            <button type="submit">CHANGE</button>
+        </form>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
