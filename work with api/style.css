@@ -16,3 +16,25 @@
     background-color: aliceblue;
     width: 200px;
 }
+
+ul{
+    display: grid;
+    grid-template-columns:  auto auto auto;
+    gap: 30px;
+}
+
+ul li{
+    padding: 20px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+ul li a{
+    padding: 5px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
