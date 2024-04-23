@@ -2,7 +2,24 @@ let list = document.querySelector('#list')
 let form = document.querySelector('#addForm')
 let changeFormContainer = document.querySelector('#changeFormContainer')
 let changeForm = document.querySelector('#changeForm')
+let search = document.querySelector('#search')
+
 let idOfChangingElement
+
+search.addEventListener('input', async () => {
+    let response = await fetch(`http://149.100.156.6:3000/items?from=${search.value}`)
+    let data = await response.json()
+    console.log(data)
+    list.innerHTML = ''
+    data.forEach(element => {
+        let li = document.createElement('li')
+        li.innerHTML = `<span>${element.from}-</span><span>${element.to}-</span>
+        <span>${element.message}-</span><span>${element.id}-</span>
+        <button onclick="deleteItems(${element.id})">X</button>
+        <button onclick="openModal(${element.id})">CHANGE</button>`
+        list.appendChild(li)
+    })
+})
 
 const addItem = async (event) => {
     try {
@@ -102,4 +119,3 @@ const getFetch = async () => {
 }
 
 getFetch()
-
