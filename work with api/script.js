@@ -98,6 +98,18 @@ const changeItem = async (event) => {
 
 changeForm.addEventListener('submit', changeItem)
 
+const getObject = (from, to, message, id) => {
+    console.log(from, to, message, id)
+    let obj = {
+        from: from,
+        to: to,
+        message: message,
+        id: id
+    }
+    console.log(obj)
+    localStorage.setItem('obj', JSON.stringify(obj))
+}
+
 const getFetch = async () => {
     try {
         const res = await fetch('http://149.100.156.6:3000/items/')
@@ -106,8 +118,8 @@ const getFetch = async () => {
             list.innerHTML = ''
             data.forEach(element => {
                 let li = document.createElement('li')
-                li.innerHTML = `<span>${element.from}-</span><span>${element.to}-</span>
-                <span>${element.message}-</span><span>${element.id}-</span>
+                li.innerHTML = `<a href="mal.html" onclick="getObject('${element.from}','${element.to}', '${element.message}','${element.id}')"><span>${element.from}-</span><span>${element.to}-</span>
+                <span>${element.message}-</span><span>${element.id}-</span></a>
                 <button onclick="deleteItems(${element.id})">X</button>
                 <button onclick="openModal(${element.id})">CHANGE</button>`
                 list.appendChild(li)
