@@ -1,0 +1,149 @@
+@import url('./normalize.css');
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  background-color: #1a73e8;
+  margin: 0;
+  color: #fff;
+  padding: 20px calc(50% - 480px);
+  font-family: 'Alata', 'Roboto', sans-serif;
+}
+
+.app__main {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px calc(50% - 480px);
+}
+
+.app__goods {
+  width: 60%;
+}
+
+.app__cart {
+  width: 38%;
+  padding: 40px;
+  background-color: #ebebeb;
+  min-height: 200px;
+  margin-bottom: 20px;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+.goods__title {
+  margin: 0 0 30px;
+}
+
+.goods__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.goods__list-item {
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.goods-item {
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.goods-item__title {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.goods-item__price {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.goods-item__price-value_old {
+  text-decoration: line-through;
+  margin-right: 10px;
+  color: #ababab;
+}
+
+.goods-item__price-value_new {
+  color: darkgreen;
+}
+
+.goods-item__description {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.goods-item__add-to-card {
+  background-color: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 10px 15px;
+  color: #5b5b5b;
+  margin-top: 20px;
+}
+
+.goods-item__add-to-card:hover {
+  color: #1a73e8;
+  border-color: #1a73e8;
+  transition: all 0.1s linear;
+}
+
+.goods-item__add-to-card:active {
+  background-color: #1a73e8;
+  color: #fff;
+  transition: all 0.1s linear;
+}
+
+.cart__title {
+  margin: 0 0 20px;
+}
+
+.cart__list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.cart__list-item {
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.cart__note {
+  margin: 0 0 10px;
+  font-size: 12px;
+}
+
+.cart__total {
+  border-top: 2px solid #000;
+  font-weight: 600;
+  margin: 0;
+  padding: 10px 0 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+}
+
+.cart-item__title {
+  margin: 0;
+  width: 60%;
+  font-size: 12px;
+}
+
+.cart-item__price {
+  margin: 0;
+  font-size: 14px;
+}
