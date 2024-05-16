@@ -1,155 +1,89 @@
-const fs = require('fs')
-const express = require('express')
+let list = document.querySelector('#list')
+let fromUser = document.querySelector('#from-user-name')
+let toUser = document.querySelector('#to-user-name')
+let changeValue = document.querySelector('#change-name')
+let form = document.querySelector('#add-form')
+let search = document.querySelector('#search')
+let changeForm = document.querySelector('#change-form')
 
-// fs.readFile('./text.txt', 'utf8', (err, data) => {
-//      if(err){
-//        console.log(err)
-//      }
+let userId
 
-//      let text = data.split(' ').filter((item) => item === 'York').join(' ')
-//      fs.writeFile('./filtered.txt', text, (err) => {
-//         if(err){
-//             console.log(err)
-//         }
-//      })
-// })
-
-// fs.readFile('./data.json', 'utf8', (err, data) => {
-//     if(err){
-//       console.log(err)
-//     }
-//     let parsedData = JSON.parse(data)
-//     console.log(parsedData)
-//     parsedData.push({
-//        "id": parsedData[parsedData.length - 1].id + 1,
-//        "name": "Ramin",
-//        "username": "ramin98",
-//        "email": "ramin@gmail.com",
-//        "address": {
-//            "street": "Kattie Turnpike",
-//            "suite": "Suite 198",
-//            "city": "Lebsackbury",
-//            "zipcode": "31428-2261",
-//            "geo": {
-//                "lat": "-38.2386",
-//                "lng": "57.2232"
-//            }
-//        },
-//        "phone": "024-648-3804",
-//        "website": "ambrose.net",
-//        "company": {
-//            "name": "Hoeger LLC",
-//            "catchPhrase": "Centralized empowering task-force",
-//            "bs": "target end-to-end models"
-//        }
-//    })
-//     fs.writeFile('./data.json', JSON.stringify(parsedData), (err) => {
-//        if(err){
-//            console.log(err)
-//        }
-//     })
-// })
-
-// fs.readFile('./workers.json','utf8', (err, data) => {
-//     if(err){
-//         console.log(err)
-//     }
-//     let parsedData = JSON.parse(data)
-//     parsedData.sort((a,b) => a.age - b.age)
-//     let len = Math.floor(parsedData.length / 2)
-//     let avarageWorker = parsedData[len]
-//     fs.writeFile('./worker.txt', JSON.stringify(avarageWorker), (err) => {
-//         if(err){
-//             console.log(err)
-//         }
-//     })
-// })
-const cors = require('cors')
-const bodyParser = require('body-parser')
-
-let app = express()
-app.use(cors())
-app.use(bodyParser.json())
-
-const HOST = 5000
-
-app.get('/workers', (req, res) => {
-    fs.readFile('./users.json', 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err)
-        }
-        let parsedData = JSON.parse(data)
-        res.json(parsedData)
-    })
-
+search.addEventListener('click', () => {
+    let searchInputFrom = document.querySelector('#searchInputFrom').value
+    let searchInputTo = document.querySelector('#searchInputTo').value
+    fetch(`http://localhost:5000/search?from=${searchInputFrom}&to=${searchInputTo}`)
+        .then((res) => res.json())
+        .then((data) => console.log(data))
 })
 
-app.post('/add-user', (req, res) => {
-
-    fs.readFile('./users.json', 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err)
-        }
-        let parsedData = JSON.parse(data)
-        console.log(parsedData)
-        let user = req.body
-        if(parsedData.length === 0){
-            user = { ...user, id: 1 }
-        }else{
-            user = { ...user, id: parsedData.at(-1).id + 1 }
-        }
-        
-        parsedData.push(user)
-        fs.writeFile('./users.json', JSON.stringify(parsedData), (err) => {
-            if (err) {
-                console.log(err)
-            }
+function showUsers() {
+    fetch('http://localhost:5000/workers')
+        .then((res) => res.json())
+        .then(data => {
+            data.forEach(element => {
+                let li = document.createElement('li')
+                li.innerHTML = `
+            <div>
+            <span>${element.id}</span>
+            <span>${element.from}</span>
+            <span>${element.to}</span>
+            <button onclick="deleteUser('${element.id}')">X</button>
+            <button onclick="findUserId('${element.id}')">Change</button>
+            </div>`
+                list.appendChild(li)
+            });
         })
-    })
+}
 
-})
+showUsers()
 
-app.delete('/delete-user/:id', (req, res) => {
-    let id = req.params.id
-    fs.readFile('./users.json', 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err)
+function deleteUser(id) {
+    fetch(`http://localhost:5000/delete-user/${id}`, {
+        method: 'DELETE'
+    }).then((res) => {
+        if (res.ok) {
+            showUsers()
         }
-        let parsedData = JSON.parse(data)
-        console.log(parsedData)
-        parsedData = parsedData.filter((item) => item.id != id)
-        fs.writeFile('./users.json', JSON.stringify(parsedData), (err) => {
-            if (err) {
-                console.log(err)
-            }
-        })
     })
-})
+}
 
-app.put('/change-user/:id', (req,res) => {
-    let id = req.params.id
-    let value = req.body.userName
-    console.log(id)
-    console.log(value)
-    fs.readFile('./users.json', 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err)
+function findUserId(id) {
+    userId = id
+    let changeContainer = document.querySelector('#change-container')
+    changeContainer.style = 'display:flex;'
+}
+
+function changeUser(ev) {
+    ev.preventDefault()
+    fetch(`http://localhost:5000/change-user/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ userName: changeValue.value })
+    }).then((res) => {
+        if (res.ok) {
+            showUsers()
         }
-        let parsedData = JSON.parse(data)
-        console.log(parsedData)
-        let objectIndex = parsedData.findIndex((item) => item.id == id)
-        parsedData[objectIndex].userName = value
-        fs.writeFile('./users.json', JSON.stringify(parsedData), (err) => {
-            if (err) {
-                console.log(err)
-            }
-        })
     })
-})
+    let changeContainer = document.querySelector('#change-container')
+    changeContainer.style = 'display:none;'
+}
 
-app.listen(HOST, (err) => {
-    if (err) {
-        console.log(err)
+
+changeForm.addEventListener('submit', changeUser)
+
+form.addEventListener('submit', (ev) => {
+    ev.preventDefault()
+    let object = {
+        from: fromUser.value,
+        to: toUser.value
     }
-    console.log('localhost:' + HOST)
+    fetch('http://localhost:5000/add-user', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(object)
+    })
 })
