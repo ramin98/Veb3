@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .change-container {
+        display: none;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .change-container form {
+        border: 2px solid black;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="username" type="text" />
+    <input id="email" type="text" />
+    <button id="add">SEND</button>
+    <ul id="list"></ul>
+
+    <div class="change-container">
+      <form>
+        <input id="usernameChange" type="text" />
+        <input id="emailChange" type="text" />
+        <button>CHANGE</button>
+      </form>
+    </div>
+    <script>
+      let add = document.querySelector("#add");
+      let list = document.querySelector("#list");
+      let changeContainer = document.querySelector(".change-container");
+      let changeForm = document.querySelector(".change-container form");
+      let user_id;
+      let changingElement;
+
+      function showList(user) {
+        let li = document.createElement("li");
+        li.innerHTML = `<p class="user-id">${user.user_id}</p>
+        <p class="user-username">${user.username}</p>
+        <p class="user-email">${user.email}</p>
+        <button onclick="deleteUser('${user.user_id}')">X</button>
+        <button onclick="findUserId('${user.user_id}')">CHANGE</button>`;
+        list.appendChild(li);
+      }
+
+      fetch("http://localhost:5000/users")
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data)) {
+            data.forEach((item) => {
+              showList(item);
+            });
+          } else {
+            console.log(data);
+          }
+        });
+
+      add.addEventListener("click", () => {
+        let username = document.querySelector("#username");
+        let email = document.querySelector("#email");
+
+        let obj = {
+          username: username.value,
+          email: email.value,
+        };
+        fetch("http://localhost:5000/add", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            obj = { ...obj, user_id: data.insertId };
+            showList(obj);
+          });
+      });
+
+      function deleteUser(id) {
+        fetch(`http://localhost:5000/delete/${id}`, {
+          method: "DELETE",
+        });
+        event.target.parentElement.remove();
+      }
+
+      function findUserId(id) {
+        user_id = id;
+        changingElement = event.target.parentElement;
+        changeContainer.style = "display:flex";
+      }
+
+      changeForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let usernameChange = document.querySelector("#usernameChange");
+        let emailChange = document.querySelector("#emailChange");
+
+        let obj = {
+          username: usernameChange.value,
+          email: emailChange.value,
+        };
+        let usernameValue = changingElement.querySelector(".user-username");
+        let emailValue = changingElement.querySelector(".user-email");
+
+        usernameValue.innerText = obj.username;
+        emailValue.innerText = obj.email;
+
+        fetch(`http://localhost:5000/change/${user_id}`, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        });
+
+        changeContainer.style = "display:none";
+      });
+    </script>
+  </body>
+</html>
